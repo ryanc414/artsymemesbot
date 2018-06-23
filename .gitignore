@@ -36,3 +36,6 @@ node_modules
 
 # Slash command database
 db_slackbutton_slash_command/
+
+# Output of backgrounded tasks
+nohup.out
