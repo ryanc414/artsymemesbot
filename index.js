@@ -42,6 +42,7 @@
 
 /* Uses the slack button feature to offer a real time bot to multiple teams */
 var Botkit = require('botkit');
+var PythonShell = require('python-shell');
 
 if (!process.env.CLIENT_ID || !process.env.CLIENT_SECRET || !process.env.PORT || !process.env.VERIFICATION_TOKEN) {
     console.log('Error: Specify CLIENT_ID, CLIENT_SECRET, VERIFICATION_TOKEN and PORT in environment');
@@ -90,7 +91,11 @@ controller.on('slash_command', function (slashCommand, message) {
     switch (message.command) {
         case "/artsymeme":
             // Post a (not so) fresh artsymeme!
-            slashCommand.replyPublic(message, "http://pbs.twimg.com/media/C65iIo6VoAERUAq.jpg");
+            PythonShell.run('artsymemesbot.py', function (err, results) {
+                if (err) throw err;
+                console.log('results: %j', results);
+                slashCommand.replyPublic(message, results[0])
+            });
             break;
 
         default:
