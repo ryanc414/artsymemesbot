@@ -33,3 +33,6 @@ node_modules
 
 # Optional REPL history
 .node_repl_history
+
+# Slash command database
+db_slackbutton_slash_command/
