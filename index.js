@@ -61,10 +61,11 @@ controller.on('slash_command', function (slashCommand, message) {
     switch (message.command) {
         case "/artsymeme":
             // Post a fresh artsymeme, by calling into python backend script.
+            slashCommand.replyAcknowledge();
             PythonShell.run('artsymemesbot.py', function (err, results) {
                 if (err) throw err;
                 console.log('results: %j', results);
-                slashCommand.replyPublic(message, results[0])
+                slashCommand.replyPublicDelayed(message, results[0])
             });
             break;
 
